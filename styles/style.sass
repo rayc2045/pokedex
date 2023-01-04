@@ -1,0 +1,92 @@
+$cardRadius: 1rem 0 1rem 0
+
+[v-cloak]
+	display: none
+
+*, *::before, *::after
+	box-sizing: border-box
+
+*
+	margin: 0
+	padding: 0
+	font: inherit
+
+// html
+// 	color-scheme: dark light
+
+body
+	min-height: 100vh
+	font-family: 'Noto Sans', sans-serif
+	color: whitesmoke
+	background-color: dimgray
+	user-select: none
+
+img, picture, svg, video
+	display: block
+	max-width: 100%
+
+input, textarea, button, select
+	font: inherit
+
+.progress-bar
+	position: fixed
+	top: 0
+	height: .3rem
+	pointer-events: none
+	transition: width 1.5s
+
+ul
+	margin: 2rem auto
+	display: flex
+	justify-content: center
+	flex-wrap: wrap
+	gap: .75rem
+	&.filter
+		width: 90%
+		gap: 1rem
+		.card
+			padding: .75rem 0
+			width: 8rem
+			cursor: pointer
+
+.card.active
+	background-color: rgba(black, .4)
+	transition: background-color .2s
+	
+.card
+	position: relative
+	padding: .75rem 1.75rem 0 1.75rem
+	list-style: none
+	text-align: center
+	border-radius: $cardRadius
+	background-color: rgba(darkgray, .4)
+	&:hover
+		.tooltip
+			opacity: 1
+	.tooltip
+		opacity: 0
+		padding: .5rem .75rem
+		position: absolute
+		bottom: .5rem
+		transform: translateX(-50%)
+		background-color: #444
+		border-radius: .3rem
+		transition: opacity .3s
+		&::after
+			content: ''
+			position: absolute
+			bottom: 100%
+			left: 50%
+			transform: translateX(-50%)
+			border-width: .4rem
+			border-style: solid
+			border-color: transparent transparent dimgray transparent
+	img
+		width: 7.5rem
+		aspect-ratio: 1 / 1
+		pointer-events: none
+	.name
+		margin-top: .5rem
+		margin-bottom: -.5rem
+		display: block
+		font-size: 1.2rem

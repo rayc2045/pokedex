@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src="./scripts/script.min.js" type="module"></script>
+</head>
+<body>
+  <ul v-cloak class="filter">
+    <li
+      :class="['card', { active: !currentType }]"
+      @click="currentType = ''"
+    >
+      All ({{ pokemons.length }})
+    </li>
+    <li
+      v-for="type of types"
+      :class="['card', { active: currentType === type }]"
+      @click="currentType = type"
+    >
+      {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types.includes(type)).length }})
+    </li>
+  </ul>
+  
+  <ul v-cloak v-effect="init()">
+    <li
+      class="card"
+      v-for="pokemon in filterPokemons"
+    >
+      <small class="tooltip">
+        {{ util.firstLetterUppercase(pokemon.name) }}
+      </small>
+      <img :src="pokemon.image" :alt="pokemon.name" loading="lazy">
+      <em class="name">{{ '#' + pokemon.id }}</em>
+      <br>
+    </li>
+  </ul>
+  
+  <div
+   class="progress-bar"
+   :style="{
+     width: progress,
+     backgroundColor: progress === '100%' ? 'transparent' : 'gold'
+   }"
+  ></div>
+</body>
+</html>
