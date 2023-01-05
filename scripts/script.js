@@ -25,15 +25,10 @@ const App = {
     return `${(this.pokemons.length / this.max) * 100}%`;
   },
   async init() {
-    this.addPokemons(this.max);
-    // this.pokemons.sort((a, b) => a.id - b.id)
-  },
-  addPokemons(num) {
-    for (let i = 1; i <= num; i++) {
-      requestAnimationFrame(() => {
-        this.fetchPokemon(this.pokemons.length + i);
-      });
-    }
+    const promises = [];
+    for (let i = 1; i <= this.max; i++) promises.push(this.fetchPokemon(i));
+    await Promise.all(promises);
+    this.pokemons.sort((a, b) => a.id - b.id);
   },
   async fetchPokemon(id) {
     const pokemon = await util.fetchData(
