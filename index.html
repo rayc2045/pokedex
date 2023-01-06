@@ -33,6 +33,7 @@
 <body v-cloak v-effect="init()">
   <ul class="filter">
     <li
+      v-if="pokemons.length"
       :class="['card', { active: !currentType }]"
       @click="currentType = ''"
     >
