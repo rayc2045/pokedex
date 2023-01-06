@@ -25,7 +25,7 @@ const App = {
     return `${(this.pokemons.length / this.max) * 100}%`;
   },
   async init() {
-    const pokemons = await fetch('../data/pokeapi.json')
+    const pokemons = await fetch('../data/PokeApi.json')
       .then(res => res.json());
     this.pokemons = pokemons;
     pokemons.forEach(pokemon =>
