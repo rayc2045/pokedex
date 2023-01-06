@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./scripts/script.min.js" type="module"></script>
 </head>
-<body>
-  <ul v-cloak class="filter">
+<body v-cloak v-effect="init()">
+  <ul class="filter">
     <li
       :class="['card', { active: !currentType }]"
       @click="currentType = ''"
@@ -47,10 +47,10 @@
     </li>
   </ul>
   
-  <ul v-cloak v-effect="init()">
+  <ul>
     <li
-      class="card"
       v-for="pokemon in filterPokemons"
+      class="card"
     >
       <small class="tooltip">
         {{ util.firstLetterUppercase(pokemon.name) }}
