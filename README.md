@@ -1,11 +1,11 @@
-# Pokedex｜寶可夢圖鑑
+# Pokédex｜寶可夢圖鑑
 
 ![cover](https://cdn.dribbble.com/users/3800131/screenshots/20303659/media/a695a56b7758e2b27ccf3e5d1574daab.png)
 
-[> Pokedex](https://po-poke-pokedex.netlify.app/)
+[> Pokédex](https://po-poke-pokedex.netlify.app/)
 
 ### 簡介
-> 在 Instagram 看到有人分享在日本操作機器、製作寶可夢客製化衣服的貼文，聯想起先前在網上閱讀到關於 Pokemon API 的文章，一時興起也使用 [PokeAPI](https://pokeapi.co/) 仿刻貼文中機器的操作介面。然而在開發過程中，發現連續抓取 905 份寶可夢資料實在耗時 (約 50 秒)，因此特意自製一份包含了 905 隻寶可夢 id、名稱、圖片及種類的 JSON 資料檔，極大縮短頁面的載入時間。
+> 在 Instagram 看到有人分享在日本操作機器、製作寶可夢客製化衣服的貼文，聯想起先前在網上閱讀到關於 Pokémon API 的文章，一時興起也使用 [PokeAPI](https://pokeapi.co/) 仿刻貼文中機器的操作介面。然而在開發過程中，發現連續抓取 905 份寶可夢資料實在耗時 (約 50 秒)，因此特意自製一份包含了 905 隻寶可夢 id、名稱、圖片及種類的 JSON 資料檔，極大縮短頁面的載入時間。
 
 ### 外觀與互動設計
 - 使用瀏覽器內建支援的色彩 - [HTML Colors](https://www.w3schools.com/tags/ref_colornames.asp) 作為色票參考
