@@ -56,7 +56,11 @@
       <small class="tooltip">
         {{ util.firstLetterUppercase(pokemon.name) }}
       </small>
-      <img :src="pokemon.image" :alt="pokemon.name" loading="lazy">
+      <img
+        :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
+        :alt="pokemon.name"
+        loading="lazy"
+      >
       <em class="name">{{ '#' + pokemon.id }}</em>
       <br>
     </li>
