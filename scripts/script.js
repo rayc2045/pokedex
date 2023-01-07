@@ -15,12 +15,6 @@ const App = {
   pokemons: [],
   types: [],
   currentType: '',
-  get filterPokemons() {
-    if (!this.currentType) return this.pokemons;
-    return this.pokemons.filter(pokemon =>
-      pokemon.types.includes(this.currentType)
-    );
-  },
   get progress() {
     return `${(this.pokemons.length / this.max) * 100}%`;
   },
