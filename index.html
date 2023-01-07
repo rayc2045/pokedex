@@ -51,8 +51,8 @@
   <ul>
     <li
       v-for="pokemon in pokemons"
+      v-show="!currentType || pokemon.types.includes(currentType)"
       class="card tooltip-container"
-      :hidden="currentType && !pokemon.types.includes(currentType)"
     >
       <small class="tooltip-bottom">
         {{ util.firstLetterUppercase(pokemon.name) }}
