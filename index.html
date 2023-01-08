@@ -60,7 +60,7 @@
       <img
         :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
         :alt="pokemon.name"
-        loading="lazy"
+        :loading="pokemon.id < 50 ? '' : 'lazy'"
       >
       <em class="pokemon-id">{{ '#' + pokemon.id }}</em>
       <br>
