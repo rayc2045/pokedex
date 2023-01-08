@@ -1,12 +1,15 @@
 import { createApp, reactive } from 'https://unpkg.com/petite-vue?module';
 
 const util = reactive({
-  fetchData(api) {
-    return fetch(api).then(res => res.json());
+  async fetchData(api) {
+    return await fetch(api).then(res => res.json());
   },
   firstLetterUppercase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   },
+  getProgress(numerator, denominator) {
+    return `${((numerator / denominator) * 100).toFixed()}%`;
+  }
 });
 
 const App = {
@@ -16,11 +19,10 @@ const App = {
   types: [],
   currentType: '',
   get progress() {
-    return `${(this.pokemons.length / this.max) * 100}%`;
+    return util.getProgress(this.pokemons.length, this.max);
   },
   async init() {
-    const pokemons = await fetch('../data/PokeApi.json')
-      .then(res => res.json());
+    const pokemons = await util.fetchData('../data/PokeApi.json')
     this.pokemons = pokemons;
     pokemons.forEach(pokemon =>
       pokemon.types.forEach(type => {
