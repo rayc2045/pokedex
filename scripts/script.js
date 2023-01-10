@@ -7,9 +7,16 @@ const util = reactive({
   firstLetterUppercase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   },
+  getNextItem(arr, currentItem) {
+    const lastIndex = arr.length - 1;
+    const nextIndex = arr.indexOf(currentItem) === lastIndex
+      ? 0
+      : arr.indexOf(currentItem) + 1;
+    return arr[nextIndex];
+  },
   getProgress(numerator, denominator) {
     return `${((numerator / denominator) * 100).toFixed()}%`;
-  }
+  },
 });
 
 const App = {
@@ -17,35 +24,94 @@ const App = {
   max: 905,
   pokemons: [],
   types: [],
-  currentType: '',
+  currentLang: 'en',
+  currentTypeIdx: -1,
   get progress() {
     return util.getProgress(this.pokemons.length, this.max);
   },
   async init() {
-    const pokemons = await util.fetchData('../data/PokeApi.json')
+    const pokemons = await util.fetchData('../data/PokeApi.json');
     this.pokemons = pokemons;
-    pokemons.forEach(pokemon =>
-      pokemon.types.forEach(type => {
-        if (!this.types.includes(type)) this.types.push(type);
-    }));
+    // get all pokemon types
+    pokemons.forEach(pokemon => {
+      const langs = Object.keys(pokemon.types);
+      const types = langs.map(_ => ({}));
+      for (const lang of langs)
+        for (const idx in pokemon.types[lang])
+          types[idx][lang] = pokemon.types[lang][idx];
+      for (const type of types.filter(type => Object.keys(type).length)) {
+        let isExist = false;
+        for (const type1 of this.types.map(t => t[langs[0]]))
+          if (type[langs[0]] === type1) isExist = true;
+        if (!isExist) this.types.push(type);
+      }
+    });
+    // this.types
     // const promises = [];
     // for (let i = 1; i <= this.max; i++) promises.push(this.fetchPokemon(i));
     // await Promise.all(promises);
     // this.pokemons.sort((a, b) => a.id - b.id);
+    // document.querySelector('textarea').textContent = JSON.stringify(this.pokemons)
   },
   // async fetchPokemon(id) {
-  //   const pokemon = await util.fetchData(
-  //     `https://pokeapi.co/api/v2/pokemon/${id}`
-  //   );
-  //   const types = pokemon.types.map(type => type.type.name);
+  //   const pokemon = await util.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  //   const species = await util.fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+  //   const types = pokemon.types.map(type => type.type.name)
+  //   const name = {
+  //     en: species.names.find(item => item.language.name === 'en').name,
+  //     zh: species.names.find(item => item.language.name === 'zh-Hant').name
+  //   }
+  //   function getEntry(entry, language, name='') {
+  //     const results = Array.from(
+  //       new Set(
+  //         entry
+  //           .filter(item => item.language.name === language)
+  //           .map(item => item['flavor_text']
+  //             .replaceAll('\n', language === 'en' ? ' ' : '')
+  //             .replaceAll('\f', ' ')
+  //             .replaceAll('POKéMON', 'Pokémon')
+  //             .replaceAll(name.toUpperCase(), name)
+  //           )
+  //       )
+  //     )
+  //     if (results.length > 3) results.length = 3
+  //     return results
+  //   }
+
   //   this.pokemons.push({
   //     id,
-  //     name: pokemon.name,
-  //     image: pokemon.sprites.other['official-artwork']['front_default'], // pokemon.sprites['front_default'],
-  //     types,
-  //   });
-  //   types.forEach(type => {
-  //     if (!this.types.includes(type)) this.types.push(type);
+  //     name,
+  //     types: {
+  //       en: types,
+  //       zh: types.map(type => {
+  //         if (type === 'grass') return '草'
+  //         if (type === 'poison') return '毒'
+  //         if (type === 'fire') return '火'
+  //         if (type === 'flying') return '飛行'
+  //         if (type === 'water') return '水'
+  //         if (type === 'bug') return '蟲'
+  //         if (type === 'normal') return '一般'
+  //         if (type === 'electric') return '電'
+  //         if (type === 'ground') return '地面'
+  //         if (type === 'fairy') return '妖精'
+  //         if (type === 'fighting') return '格鬥'
+  //         if (type === 'psychic') return '超能力'
+  //         if (type === 'rock') return '岩石'
+  //         if (type === 'steel') return '鋼'
+  //         if (type === 'ice') return '冰'
+  //         if (type === 'ghost') return '幽靈'
+  //         if (type === 'dragon') return '龍'
+  //         if (type === 'dark') return '惡'
+  //       })
+  //     },
+  //     genera: {
+  //       en: species.genera.find(item => item.language.name === 'en') ? species.genera.find(item => item.language.name === 'en').genus : '',
+  //       zh: species.genera.find(item => item.language.name === 'zh-Hant') ? species.genera.find(item => item.language.name === 'zh-Hant').genus : '',
+  //     },
+  //     entries: {
+  //       en: getEntry(species['flavor_text_entries'], 'en', name.en),
+  //       zh: getEntry(species['flavor_text_entries'], 'zh-Hant')
+  //     }
   //   });
   // },
 };

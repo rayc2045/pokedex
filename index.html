@@ -25,7 +25,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
   <!-- Styles & Scripts -->
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./scripts/script.min.js" type="module"></script>
@@ -34,38 +34,43 @@
   <ul class="filter">
     <li
       v-if="pokemons.length"
-      :class="['card', { active: !currentType }]"
-      @click="currentType = ''"
+      :class="['card', { active: currentTypeIdx < 0 }]"
+      @click="currentTypeIdx = -1"
     >
       All ({{ pokemons.length }})
     </li>
     <li
-      v-for="type of types"
-      :class="['card', { active: currentType === type }]"
-      @click="currentType = type"
+      v-for="(type, typeIdx) of types.map(type => type[currentLang])"
+      :class="['card', { active: typeIdx === currentTypeIdx }]"
+      @click="currentTypeIdx = typeIdx"
     >
-      {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types.includes(type)).length }})
+      {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types[currentLang].includes(type)).length }})
     </li>
   </ul>
   
   <ul>
     <li
-      v-for="pokemon in pokemons"
-      v-show="!currentType || pokemon.types.includes(currentType)"
+      v-for="pokemon of pokemons"
+      v-show="currentTypeIdx < 0 || pokemon.types[currentLang].includes(types[currentTypeIdx][currentLang])"
       class="card tooltip-container"
     >
-      <small class="tooltip-bottom">
-        {{ util.firstLetterUppercase(pokemon.name) }}
-      </small>
+      <div class="tooltip-bottom">{{ pokemon.name[currentLang] }}</div>
       <img
         :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
-        :alt="pokemon.name"
+        :alt="pokemon.name[currentLang]"
         :loading="pokemon.id < 50 ? '' : 'lazy'"
       >
       <em class="pokemon-id">{{ '#' + pokemon.id }}</em>
     </li>
   </ul>
-  
+
+  <button
+    class="lang-toggle"
+    @click="currentLang = util.getNextItem(['en', 'zh'], currentLang)"
+  >
+    {{ currentLang === 'en' ? '中文' : 'English' }}
+  </button>
+
   <div
    class="progress-bar"
    :style="{
