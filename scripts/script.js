@@ -39,7 +39,8 @@ const App = {
       for (const lang of langs)
         for (const idx in pokemon.types[lang])
           types[idx][lang] = pokemon.types[lang][idx];
-      for (const type of types.filter(type => Object.keys(type).length)) {
+      types.length = pokemon.types[langs[0]].length;
+      for (const type of types) {
         let isExist = false;
         for (const type1 of this.types.map(t => t[langs[0]]))
           if (type[langs[0]] === type1) isExist = true;
@@ -55,27 +56,28 @@ const App = {
   },
   // async fetchPokemon(id) {
   //   const pokemon = await util.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  //   const species = await util.fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
-  //   const types = pokemon.types.map(type => type.type.name)
+  //   const species = await util.fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+  //   const types = pokemon.types.map(type => type.type.name);
   //   const name = {
   //     en: species.names.find(item => item.language.name === 'en').name,
-  //     zh: species.names.find(item => item.language.name === 'zh-Hant').name
-  //   }
-  //   function getEntry(entry, language, name='') {
+  //     zh: species.names.find(item => item.language.name === 'zh-Hant').name,
+  //   };
+  //   function getEntry(entry, language, name = '') {
   //     const results = Array.from(
   //       new Set(
   //         entry
   //           .filter(item => item.language.name === language)
-  //           .map(item => item['flavor_text']
-  //             .replaceAll('\n', language === 'en' ? ' ' : '')
-  //             .replaceAll('\f', ' ')
-  //             .replaceAll('POKéMON', 'Pokémon')
-  //             .replaceAll(name.toUpperCase(), name)
+  //           .map(item =>
+  //             item['flavor_text']
+  //               .replaceAll('\n', language === 'en' ? ' ' : '')
+  //               .replaceAll('\f', ' ')
+  //               .replaceAll('POKéMON', 'Pokémon')
+  //               .replaceAll(name.toUpperCase(), name)
   //           )
   //       )
-  //     )
-  //     if (results.length > 3) results.length = 3
-  //     return results
+  //     );
+  //     if (results.length > 3) results.length = 3;
+  //     return results;
   //   }
 
   //   this.pokemons.push({
@@ -84,34 +86,38 @@ const App = {
   //     types: {
   //       en: types,
   //       zh: types.map(type => {
-  //         if (type === 'grass') return '草'
-  //         if (type === 'poison') return '毒'
-  //         if (type === 'fire') return '火'
-  //         if (type === 'flying') return '飛行'
-  //         if (type === 'water') return '水'
-  //         if (type === 'bug') return '蟲'
-  //         if (type === 'normal') return '一般'
-  //         if (type === 'electric') return '電'
-  //         if (type === 'ground') return '地面'
-  //         if (type === 'fairy') return '妖精'
-  //         if (type === 'fighting') return '格鬥'
-  //         if (type === 'psychic') return '超能力'
-  //         if (type === 'rock') return '岩石'
-  //         if (type === 'steel') return '鋼'
-  //         if (type === 'ice') return '冰'
-  //         if (type === 'ghost') return '幽靈'
-  //         if (type === 'dragon') return '龍'
-  //         if (type === 'dark') return '惡'
-  //       })
+  //         if (type === 'grass') return '草';
+  //         if (type === 'poison') return '毒';
+  //         if (type === 'fire') return '火';
+  //         if (type === 'flying') return '飛行';
+  //         if (type === 'water') return '水';
+  //         if (type === 'bug') return '蟲';
+  //         if (type === 'normal') return '一般';
+  //         if (type === 'electric') return '電';
+  //         if (type === 'ground') return '地面';
+  //         if (type === 'fairy') return '妖精';
+  //         if (type === 'fighting') return '格鬥';
+  //         if (type === 'psychic') return '超能力';
+  //         if (type === 'rock') return '岩石';
+  //         if (type === 'steel') return '鋼';
+  //         if (type === 'ice') return '冰';
+  //         if (type === 'ghost') return '幽靈';
+  //         if (type === 'dragon') return '龍';
+  //         if (type === 'dark') return '惡';
+  //       }),
   //     },
   //     genera: {
-  //       en: species.genera.find(item => item.language.name === 'en') ? species.genera.find(item => item.language.name === 'en').genus : '',
-  //       zh: species.genera.find(item => item.language.name === 'zh-Hant') ? species.genera.find(item => item.language.name === 'zh-Hant').genus : '',
+  //       en: species.genera.find(item => item.language.name === 'en')
+  //         ? species.genera.find(item => item.language.name === 'en').genus
+  //         : '',
+  //       zh: species.genera.find(item => item.language.name === 'zh-Hant')
+  //         ? species.genera.find(item => item.language.name === 'zh-Hant').genus
+  //         : '',
   //     },
   //     entries: {
   //       en: getEntry(species['flavor_text_entries'], 'en', name.en),
-  //       zh: getEntry(species['flavor_text_entries'], 'zh-Hant')
-  //     }
+  //       zh: getEntry(species['flavor_text_entries'], 'zh-Hant'),
+  //     },
   //   });
   // },
 };
