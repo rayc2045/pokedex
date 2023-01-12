@@ -12,9 +12,11 @@
 - 使用[思源黑體 (Noto Sans TC)](https://fonts.google.com/noto/specimen/Noto+Sans+TC) 作為網站字體
 - 透過載入目標數和當前資料量做計算、結合樣式綁定 (Style Binding) 方法，製作出頁面上方跑動的進度條
 - 參考 W3Schools 介紹使用 CSS 製作的[提示框 (Tooltip)](https://www.w3schools.com/css/css_tooltip.asp)，做出滑鼠碰觸圖鑑元素就會在序號前顯示寶可夢名稱的方便設計
+- 資訊卡中的寶可夢圖片加上白色陰影 ([CSS `drop-shadow()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow))，達成如同發出光輝般的效果
 
 ### 開發紀錄
 - 透過 Node.js 將 PokeAPI 905 份寶可夢資料轉換成一份 [JSON API](https://raw.githubusercontent.com/rayc2045/pokedex/main/data/PokeApi.json)，將網頁載入時間縮短為 1 秒，並實現中英語言切換
 - 使用體積小的 Vue 代替方案 - [Petite Vue](https://github.com/vuejs/petite-vue) 作為開發方式
 - 使用寶可夢的 `types` 資料，製作出可透過點擊切換不同寶可夢種類的標籤
 - 開發過程中發現在切換寶可夢分類 (filter) 時，相較於建立 computed 的資料再使用 Vue 語法 `v-for` 產出元素，透過對元素綁定 HTML 屬性 `hidden` 或是改變其 CSS 屬性 `display` 的作法，有更好的狀態更新效能
+- 分別針對資訊卡中的寶可夢中、英文名字，以平均字數為基準，自動調整字體大小
