@@ -24,10 +24,22 @@ const App = {
   max: 905,
   pokemons: [],
   types: [],
-  currentLang: 'en',
+  currentLang: navigator.language === 'zh-TW' ? 'zh' : 'en',
   currentTypeIdx: -1,
+  currentPokemon: null,
+  isDialogOpen: false,
   get progress() {
     return util.getProgress(this.pokemons.length, this.max);
+  },
+  get pokemonInfoNameSize() {
+    if (!this.currentPokemon) return;
+    const length = this.currentPokemon.name[this.currentLang].length;
+    const baseSize = '2em';
+    if (this.currentLang === 'en' && length > 7)
+      return `calc(${baseSize} * ${1 - 0.03 * length})`;
+    if (this.currentLang === 'zh' && length > 3)
+      return `calc(${baseSize} * ${1 - 0.035 * length})`;
+    return baseSize;
   },
   async init() {
     const pokemons = await util.fetchData('../data/PokeApi.json');

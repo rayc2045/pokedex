@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://raw.githubusercontent.com/rayc2045/pokedex/main/images/pokeball.png">
-  <title>Pokédex</title>
-  <meta name="title" content="Pokédex">
+  <title>Pokédex｜寶可夢圖鑑</title>
+  <meta name="title" content="Pokédex｜寶可夢圖鑑">
   <meta name="description" content="Pokedex made with PokeAPI">
   <meta name="keywords" content="pokemon pokedex vue">
   <meta name="author" content="Ray Chang">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://po-poke-pokedex.netlify.app/">
-  <meta property="og:title" content="Pokédex">
+  <meta property="og:title" content="Pokédex｜寶可夢圖鑑">
   <meta property="og:description" content="Pokedex made with PokeAPI">
   <meta property="og:image" content="https://cdn.dribbble.com/users/3800131/screenshots/20303659/media/a695a56b7758e2b27ccf3e5d1574daab.png">
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://po-poke-pokedex.netlify.app/">
-  <meta property="twitter:title" content="Pokédex">
+  <meta property="twitter:title" content="Pokédex｜寶可夢圖鑑">
   <meta property="twitter:description" content="Pokedex made with PokeAPI">
   <meta property="twitter:image" content="https://cdn.dribbble.com/users/3800131/screenshots/20303659/media/a695a56b7758e2b27ccf3e5d1574daab.png">
   <!-- Fonts -->
@@ -30,7 +30,11 @@
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./scripts/script.min.js" type="module"></script>
 </head>
-<body v-cloak v-effect="init()">
+<body
+  v-cloak
+  v-effect="init()"
+  :style="{ overflow: isDialogOpen ? 'hidden' : 'auto'}"
+>
   <ul class="filter">
     <li
       v-if="pokemons.length"
@@ -48,11 +52,12 @@
     </li>
   </ul>
   
-  <ul>
+  <ul class="pokemons">
     <li
       v-for="pokemon of pokemons"
       v-show="currentTypeIdx < 0 || pokemon.types[currentLang].includes(types[currentTypeIdx][currentLang])"
       class="card tooltip-container"
+      @click="currentPokemon = pokemon; isDialogOpen = true;"
     >
       <div class="tooltip-bottom">{{ pokemon.name[currentLang] }}</div>
       <img
@@ -65,11 +70,45 @@
   </ul>
 
   <button
-    class="lang-toggle"
+    v-if="pokemons.length"
+    class="lang-switch"
     @click="currentLang = util.getNextItem(['en', 'zh'], currentLang)"
   >
     {{ currentLang === 'en' ? '中文' : 'English' }}
   </button>
+
+  <dialog v-if="currentPokemon" v-show="isDialogOpen">
+    <div class="pokemon-info">
+      <button class="close" @click="isDialogOpen = false">✕</button>
+      <div class="row">
+        <img
+          :src="`/images/official-artwork/front_default/${currentPokemon.id}.png`"
+          :alt="currentPokemon.name[currentLang]"
+        >
+        <div class="right">
+          <div class="name">
+            <h1
+              :style="{ fontSize: pokemonInfoNameSize }"
+            >{{ currentPokemon.name[currentLang] }}</h1>
+            <span class="text-gray">
+              {{ currentPokemon.genera[currentLang] }}
+            </span>
+          </div>
+          <div class="type">
+            <h2>{{ currentLang === 'en' ? 'Type' : '屬性' }}</h2>
+            <span class="text-gray">{{
+              currentPokemon.types[currentLang]
+                .join(currentLang === 'en' ? ', ' : '、')
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p v-for="entry of currentPokemon.entries[currentLang]">
+        {{ entry }}
+      </p>
+    </div>
+  </dialog>
 
   <div
    class="progress-bar"

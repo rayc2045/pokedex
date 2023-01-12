@@ -1,4 +1,5 @@
 $cardRadius: 1rem 0 1rem 0
+$pokemonDropshadow: drop-shadow(0 0 10px rgba(whitesmoke, .8))
 
 *, *::before, *::after
 	box-sizing: border-box
@@ -41,11 +42,11 @@ button
 			opacity: 1
 	[class^='tooltip']
 		opacity: 0
-		padding: .5rem .75rem
+		padding: .5em .75em
 		position: absolute
 		display: block
 		background-color: #444
-		border-radius: .3rem
+		border-radius: .3em
 		transition: opacity .3s
 		&::after
 			content: ''
@@ -53,7 +54,7 @@ button
 			bottom: 100%
 			left: 50%
 			transform: translateX(-50%)
-			border-width: .4rem
+			border-width: .4em
 			border-style: solid
 			border-color: transparent transparent dimgray transparent
 	.tooltip-bottom
@@ -68,7 +69,7 @@ button
 	pointer-events: none
 	transition: width 1.5s
 
-.lang-toggle
+.lang-switch
 	position: absolute
 	right: 0
 	top: 0
@@ -78,7 +79,66 @@ button
 	&:hover
 		text-decoration-line: underline
 
-ul
+dialog
+	position: fixed
+	left: 0
+	top: 0
+	width: 100vw
+	height: 100vh
+	display: grid
+	place-content: center
+	background-color: rgba(black, .7)
+	backdrop-filter: blur(5px)
+	border: none
+
+.pokemon-info
+	position: relative
+	padding: 1.2em 2.2em
+	max-width: 25em
+	background-color: dimgray
+	border-radius: 20px
+	.close
+		padding: .3em .5em
+		position: absolute
+		top: .5em
+		right: .75em
+		font-size: 135%
+		opacity: .7
+		transition: opacity .2s
+		&:hover
+			opacity: 1
+	.row
+		margin-top: 1em
+		display: flex
+	img
+		width: 55%
+		filter: $pokemonDropshadow
+	.right
+		margin-left: 1em
+		display: flex
+		flex-direction: column
+		justify-content: space-evenly
+	.text-gray
+		color: silver
+	.name > h1
+		font-size: 2em
+	.type > h2
+		font-size: 1.3em
+	hr
+		margin-top: 1em
+		margin-bottom: 1.5em
+		opacity: .4
+	p
+		margin-bottom: .75em
+		letter-spacing: .02em
+		opacity: .85
+
+.card
+	border-radius: $cardRadius
+	background-color: rgba(darkgray, .4)
+	cursor: pointer
+
+.filter, .pokemons
 	margin: 2rem auto
 	display: flex
 	justify-content: center
@@ -88,30 +148,29 @@ ul
 .filter
 	width: 90%
 	gap: 1rem
-	.card
-		padding: .75rem 0
-		width: 8rem
-		cursor: pointer
-	.card.active
+	li
+		padding: .75em 0
+		width: 8em
+		list-style: none
+		text-align: center
+	li.active
 		background-color: rgba(black, .4)
 		transition: background-color .2s
 
-.card
+.pokemons li
 	position: relative
-	padding: .75rem 1.75rem 1.25rem 1.75rem
+	padding: .75em 1.75em 1.25em 1.75em
 	list-style: none
 	text-align: center
-	border-radius: $cardRadius
-	background-color: rgba(darkgray, .4)
 	.tooltip-bottom
-		font-size: .9rem
-		bottom: .5rem
+		font-size: .9em
+		bottom: .5em
 	img
-		width: 7.5rem
+		width: 7.5em
 		aspect-ratio: 1 / 1
 		pointer-events: none
 	.pokemon-id
-		margin-top: .5rem
-		margin-bottom: -.5rem
+		margin-top: .5em
+		margin-bottom: -.5em
 		display: block
-		font-size: 1.2rem
+		font-size: 1.2em
