@@ -22,6 +22,8 @@ body
 img, picture, svg, video
 	display: block
 	max-width: 100%
+img
+	pointer-events: none
 
 input, textarea, button, select
 	font: inherit
@@ -68,6 +70,18 @@ button
 	height: .3rem
 	pointer-events: none
 	transition: width 1.5s
+
+.loading
+	position: fixed
+	left: 0
+	top: 0
+	width: 100vw
+	height: 100vh
+	display: grid
+	place-content: center
+	background-color: #333
+	img
+		filter: drop-shadow(0 10px 10px rgba(black, .5))
 
 .lang-switch
 	position: absolute
@@ -119,7 +133,6 @@ dialog
 	img
 		width: 55%
 		filter: $pokemonDropshadow
-		pointer-events: none
 	.right
 		margin-left: 1em
 		display: flex
@@ -175,7 +188,6 @@ dialog
 	img
 		width: 7.5em
 		aspect-ratio: 1 / 1
-		pointer-events: none
 	.pokemon-id
 		margin-top: .5em
 		margin-bottom: -.5em

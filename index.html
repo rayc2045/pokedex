@@ -33,7 +33,7 @@
 <body
   v-cloak
   v-effect="init()"
-  :style="{ overflow: isDialogOpen ? 'hidden' : 'auto'}"
+  :style="{ overflow: (isLoading || isDialogOpen) ? 'hidden' : 'auto'}"
 >
   <ul class="filter">
     <li
@@ -109,6 +109,10 @@
       </p>
     </div>
   </dialog>
+
+  <div class="loading" v-show="isLoading">
+    <img src="./images/pikachu_running.gif">
+  </div>
 
   <div
    class="progress-bar"

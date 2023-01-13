@@ -21,6 +21,7 @@ const util = reactive({
 
 const App = {
   util,
+  isLoading: true,
   max: 905,
   pokemons: [],
   types: [],
@@ -59,6 +60,8 @@ const App = {
         if (!isExist) this.types.push(type);
       }
     });
+
+    this.isLoading = false;
     // this.types
     // const promises = [];
     // for (let i = 1; i <= this.max; i++) promises.push(this.fetchPokemon(i));
