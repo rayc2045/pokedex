@@ -1,5 +1,5 @@
 $cardRadius: 1rem 0 1rem 0
-$pokemonDropshadow: drop-shadow(0 0 10px rgba(whitesmoke, .8))
+$pokemonDropshadow: drop-shadow(0 0 10px rgba(whitesmoke, .7))
 
 *, *::before, *::after
 	box-sizing: border-box
@@ -16,7 +16,7 @@ body
 	min-height: 100vh
 	font-family: 'Noto Sans TC', sans-serif
 	color: whitesmoke
-	background-color: dimgray
+	background-color: #555
 	user-select: none
 
 img, picture, svg, video
@@ -95,7 +95,7 @@ dialog
 	position: relative
 	padding: 1.2em 2.2em
 	max-width: 25em
-	background-color: dimgray
+	background-color: #555
 	border-radius: 20px
 	.close
 		padding: .3em .5em
@@ -113,6 +113,7 @@ dialog
 	img
 		width: 55%
 		filter: $pokemonDropshadow
+		pointer-events: none
 	.right
 		margin-left: 1em
 		display: flex
@@ -127,11 +128,11 @@ dialog
 	hr
 		margin-top: 1em
 		margin-bottom: 1.5em
-		opacity: .4
+		opacity: .5
 	p
 		margin-bottom: .75em
 		letter-spacing: .02em
-		opacity: .85
+		opacity: .8
 
 .card
 	border-radius: $cardRadius
