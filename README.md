@@ -1,6 +1,6 @@
 # Pokédex｜寶可夢圖鑑
 
-![cover](https://cdn.dribbble.com/users/3800131/screenshots/20303659/media/a695a56b7758e2b27ccf3e5d1574daab.png)
+![cover](https://cdn.dribbble.com/users/3800131/screenshots/20373285/media/49406b603c8d8386bd9cf6bcfb67cc6d.png)
 
 [> Pokédex](https://po-poke-pokedex.netlify.app/)
 
