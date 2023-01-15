@@ -41,7 +41,7 @@
       :class="['card', { active: currentTypeIdx < 0 }]"
       @click="currentTypeIdx = -1"
     >
-      All ({{ pokemons.length }})
+      {{ currentLang === 'en' ? 'All' : '全部' }} ({{ pokemons.length }})
     </li>
     <li
       v-for="(type, typeIdx) of types.map(type => type[currentLang])"
