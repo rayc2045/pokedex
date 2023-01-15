@@ -61,6 +61,7 @@
     >
       <div class="tooltip-bottom">{{ pokemon.name[currentLang] }}</div>
       <img
+        class="square"
         :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
         :alt="pokemon.name[currentLang]"
         :loading="pokemon.id < 50 ? '' : 'lazy'"
@@ -89,6 +90,7 @@
       <button class="close" @click="isDialogOpen = false">✕</button>
       <div class="row">
         <img
+          class="square"
           :src="`/images/official-artwork/front_default/${currentPokemon.id}.png`"
           :alt="currentPokemon.name[currentLang]"
         >
