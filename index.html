@@ -42,7 +42,7 @@
       :class="['card', { active: currentTypeIdx < 0 }]"
       @click="currentTypeIdx = -1"
     >
-      {{ currentLang === 'en' ? 'All' : '全部' }} ({{ pokemons.length }})
+      {{ currentLang === 'zh' ? '全部' : 'All' }} ({{ pokemons.length }})
     </li>
     <li
       v-for="(type, typeIdx) of types.map(type => type[currentLang])"
@@ -83,7 +83,7 @@
     class="lang-switch"
     @click="currentLang = util.getNextItem(Object.keys(pokemons[0].name), currentLang)"
   >
-    {{ currentLang === 'en' ? '中文' : 'English' }}
+    {{ currentLang === 'zh' ? 'English' : '中文' }}
   </button>
 
   <dialog v-if="currentPokemon" v-show="isDialogOpen">
@@ -105,10 +105,10 @@
             </span>
           </div>
           <div class="type">
-            <h2>{{ currentLang === 'en' ? 'Type' : '屬性' }}</h2>
+            <h2>{{ currentLang === 'zh' ? '屬性' : 'Type' }}</h2>
             <span class="text-gray">{{
               currentPokemon.types[currentLang]
-                .join(currentLang === 'en' ? ', ' : '、')
+                .join(currentLang === 'zh' ? '、' : ', ')
             }}</span>
           </div>
         </div>
