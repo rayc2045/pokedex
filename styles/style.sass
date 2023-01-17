@@ -1,6 +1,12 @@
 $cardRadius: 1rem 0 1rem 0
 $pokemonDropshadow: drop-shadow(0 0 10px rgba(whitesmoke, .7))
 
+@keyframes spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
 *, *::before, *::after
   box-sizing: border-box
 
@@ -85,6 +91,7 @@ button
   background-color: #333
   img
     filter: drop-shadow(0 10px 10px rgba(black, .5))
+    animation: spin 1.2s infinite
 
 .lang-switch
   position: absolute
