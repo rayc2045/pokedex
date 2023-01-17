@@ -10,7 +10,7 @@
 ### 外觀與互動設計
 - 使用瀏覽器內建支援的色彩 - [HTML Colors](https://www.w3schools.com/tags/ref_colornames.asp) 作為色票參考
 - 使用[思源黑體 (Noto Sans TC)](https://fonts.google.com/noto/specimen/Noto+Sans+TC) 作為網站字體
-- 加入皮卡丘跑步動畫作為網頁載入完成前的過場
+- 加入寶貝球圖片配上 CSS 旋轉動畫作為網頁載入完成前的過場
 - 透過載入目標數和當前資料量做計算、結合樣式綁定 (Style Binding) 方法，製作出頁面上方跑動的進度條
 - 參考 W3Schools 介紹使用 CSS 製作的[提示框 (Tooltip)](https://www.w3schools.com/css/css_tooltip.asp)，做出滑鼠碰觸圖鑑元素就會在序號前顯示寶可夢名稱的方便設計
 - 資訊卡中的寶可夢圖片加上白色陰影 ([CSS `drop-shadow()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow))，達成如同發出光輝般的效果
