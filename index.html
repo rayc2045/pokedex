@@ -32,8 +32,9 @@
 </head>
 <body
   v-cloak
-  v-effect="init()"
   :style="{ overflow: (isLoading || isDialogOpen) ? 'hidden' : 'auto'}"
+  @vue:mounted="init()"
+  v-effect="updateTitle()"
 >
   <ul class="filter">
     <li
@@ -64,7 +65,7 @@
         class="square"
         :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
         :alt="pokemon.name[currentLang]"
-        :loading="pokemon.id < 50 ? '' : 'lazy'"
+        :loading="pokemon.id < 51 ? 'eager' : 'lazy'"
       >
       <em class="pokemon-id">{{ '#' + pokemon.id }}</em>
     </li>
@@ -77,7 +78,11 @@
     </a>
   </footer>
 
-  <button v-if="pokemons.length" class="lang-switch" @click="switchLang">
+  <button
+    v-if="pokemons.length"
+    class="lang-switch"
+    @click="currentLang = util.getNextItem(Object.keys(pokemons[0].name), currentLang)"
+  >
     {{ currentLang === 'en' ? '中文' : 'English' }}
   </button>
 
@@ -116,7 +121,7 @@
   </dialog>
 
   <div class="loading" v-show="isLoading">
-    <img class="square" src="./images/pokeball_loading.svg" width="200px">
+    <img src="./images/pokeball_loading.svg" width="200" height="200">
   </div>
 
   <div

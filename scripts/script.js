@@ -18,14 +18,14 @@ const util = reactive({
 
 const App = {
   util,
-  isLoading: true,
   max: 905,
   pokemons: [],
   types: [],
-  currentLang: navigator.language === 'zh-TW' ? 'zh' : 'en',
+  isLoading: true,
+  isDialogOpen: false,
+  currentLang: 'en',
   currentTypeIdx: -1,
   currentPokemon: null,
-  isDialogOpen: false,
   get progress() {
     return util.getProgress(this.pokemons.length, this.max);
   },
@@ -40,7 +40,6 @@ const App = {
     return baseSize;
   },
   async init() {
-    this.updateTitle();
     const pokemons = await util.fetchData('../data/PokeApi.json');
     this.pokemons = pokemons;
     // get all pokemon types
@@ -58,6 +57,11 @@ const App = {
         if (!isExist) this.types.push(type);
       }
     });
+
+    const userLang = navigator.language.split('-')[0];
+    if (Object.keys(this.pokemons[0].name).includes(userLang))
+      this.currentLang = userLang;
+
     this.isLoading = false;
     // this.types
     // const promises = [];
@@ -67,15 +71,8 @@ const App = {
     // document.querySelector('textarea').textContent = JSON.stringify(this.pokemons)
   },
   updateTitle() {
-    if (this.currentLang === 'en') document.title = 'Pokédex';
-    if (this.currentLang === 'zh') document.title = '寶可夢圖鑑';
-  },
-  switchLang() {
-    this.currentLang = util.getNextItem(
-      Object.keys(this.pokemons[0].name),
-      this.currentLang
-    );
-    this.updateTitle();
+    if (this.currentLang === 'zh') return (document.title = '寶可夢圖鑑');
+    document.title = 'Pokédex';
   },
   // async fetchPokemon(id) {
   //   const pokemon = await util.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
