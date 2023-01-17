@@ -58,9 +58,9 @@ const App = {
       }
     });
 
+    const dataLangs = Object.keys(this.pokemons[0].name);
     const userLang = navigator.language.split('-')[0];
-    if (Object.keys(this.pokemons[0].name).includes(userLang))
-      this.currentLang = userLang;
+    if (dataLangs.includes(userLang)) this.currentLang = userLang;
 
     this.isLoading = false;
     // this.types
