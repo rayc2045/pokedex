@@ -5,21 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://raw.githubusercontent.com/rayc2045/pokedex/main/images/pokeball.png">
-  <title>Pokédex｜寶可夢圖鑑</title>
-  <meta name="title" content="Pokédex｜寶可夢圖鑑">
+  <title>Pokédex</title>
+  <meta name="title" content="Pokédex">
   <meta name="description" content="Pokedex made with PokeAPI">
   <meta name="keywords" content="pokemon pokedex vue">
   <meta name="author" content="Ray Chang">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://po-poke-pokedex.netlify.app/">
-  <meta property="og:title" content="Pokédex｜寶可夢圖鑑">
+  <meta property="og:title" content="Pokédex">
   <meta property="og:description" content="Pokedex made with PokeAPI">
   <meta property="og:image" content="https://cdn.dribbble.com/users/3800131/screenshots/20373285/media/49406b603c8d8386bd9cf6bcfb67cc6d.png">
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://po-poke-pokedex.netlify.app/">
-  <meta property="twitter:title" content="Pokédex｜寶可夢圖鑑">
+  <meta property="twitter:title" content="Pokédex">
   <meta property="twitter:description" content="Pokedex made with PokeAPI">
   <meta property="twitter:image" content="https://cdn.dribbble.com/users/3800131/screenshots/20373285/media/49406b603c8d8386bd9cf6bcfb67cc6d.png">
   <!-- Fonts -->
@@ -77,11 +77,7 @@
     </a>
   </footer>
 
-  <button
-    v-if="pokemons.length"
-    class="lang-switch"
-    @click="currentLang = util.getNextItem(Object.keys(pokemons[0].name), currentLang)"
-  >
+  <button v-if="pokemons.length" class="lang-switch" @click="switchLang">
     {{ currentLang === 'en' ? '中文' : 'English' }}
   </button>
 

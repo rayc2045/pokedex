@@ -40,6 +40,7 @@ const App = {
     return baseSize;
   },
   async init() {
+    this.updateTitle();
     const pokemons = await util.fetchData('../data/PokeApi.json');
     this.pokemons = pokemons;
     // get all pokemon types
@@ -57,7 +58,6 @@ const App = {
         if (!isExist) this.types.push(type);
       }
     });
-
     this.isLoading = false;
     // this.types
     // const promises = [];
@@ -65,6 +65,17 @@ const App = {
     // await Promise.all(promises);
     // this.pokemons.sort((a, b) => a.id - b.id);
     // document.querySelector('textarea').textContent = JSON.stringify(this.pokemons)
+  },
+  updateTitle() {
+    if (this.currentLang === 'en') document.title = 'Pokédex';
+    if (this.currentLang === 'zh') document.title = '寶可夢圖鑑';
+  },
+  switchLang() {
+    this.currentLang = util.getNextItem(
+      Object.keys(this.pokemons[0].name),
+      this.currentLang
+    );
+    this.updateTitle();
   },
   // async fetchPokemon(id) {
   //   const pokemon = await util.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
