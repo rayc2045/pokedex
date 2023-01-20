@@ -180,14 +180,13 @@ dialog
 
 .filter, .pokemons
   margin: 2rem auto
-  display: flex
-  justify-content: center
-  flex-wrap: wrap
-  gap: .75rem
 
 .filter
   width: 90%
-  gap: 1rem
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+  gap: 1em
   li
     padding: .75em 0
     width: 8em
@@ -197,11 +196,17 @@ dialog
     background-color: rgba(black, .5)
     transition: background-color .2s
 
-.pokemons li
-  position: relative
-  padding: .75em 1.75em 1.25em 1.75em
-  list-style: none
-  text-align: center
+.pokemons
+  padding-inline: .75em
+  display: grid
+  justify-content: center
+  grid-template-columns: repeat(auto-fit, 11em)
+  gap: .75em
+  li
+    position: relative
+    padding: .75em 1.75em 1.25em 1.75em
+    list-style: none
+    text-align: center
   .tooltip-bottom
     font-size: .9em
     bottom: .5em
