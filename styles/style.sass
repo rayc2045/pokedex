@@ -21,9 +21,12 @@ html
 body
   min-height: 100vh
   font-family: 'Noto Sans TC', sans-serif
+  font-size: 16px
   color: whitesmoke
   background-color: #555
   user-select: none
+  @media (min-width: 1600px)
+    font-size: 1vw
 
 img, picture, svg, video
   display: block
@@ -90,6 +93,7 @@ button
   place-content: center
   background-color: #333
   img
+    width: 12.5em
     filter: drop-shadow(0 10px 10px rgba(black, .5))
     animation: spin 1.2s infinite
 
@@ -97,8 +101,7 @@ button
   position: absolute
   right: 0
   top: 0
-  padding-block: .3rem
-  width: 4rem
+  padding: .3em .6em
   font-size: 95%
   &:hover
     text-decoration-line: underline
