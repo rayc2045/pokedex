@@ -97,15 +97,6 @@ button
     filter: drop-shadow(0 10px 10px rgba(black, .5))
     animation: spin 1.2s infinite
 
-.lang-switch
-  position: absolute
-  right: 0
-  top: 0
-  padding: .3em .6em
-  font-size: 95%
-  &:hover
-    text-decoration-line: underline
-
 dialog
   position: fixed
   left: 0
@@ -176,16 +167,35 @@ dialog
     letter-spacing: .02em
     opacity: .8
 
+.lang-switch
+  position: absolute
+  right: 0
+  top: 0
+  padding: .5rem 1rem
+  font-size: 95%
+  &:hover
+    text-decoration-line: underline
+
+header
+  text-align: center
+  img
+    margin: 2.5em auto
+    max-width: 20em
+    filter: $pokemonDropshadow
+  .logo-zh
+    margin-block: 2.88em
+
 .card
   border-radius: $cardRadius
   background-color: rgba(darkgray, .4)
   cursor: pointer
 
 .filter, .pokemons
-  margin: 2rem auto
+  margin-block: 2em
 
 .filter
   width: 90%
+  margin-inline: auto
   display: flex
   justify-content: center
   flex-wrap: wrap
@@ -222,7 +232,7 @@ dialog
     font-size: 1.2em
 
 footer
-  margin-block: 1rem
+  margin-block: 1em
   display: flex
   justify-content: center
   a

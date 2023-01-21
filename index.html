@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://raw.githubusercontent.com/rayc2045/pokedex/main/images/pokeball.png">
+  <link rel="icon" href="./images/pokeball_icon.png">
   <title>Pokédex</title>
   <meta name="title" content="Pokédex">
   <meta name="description" content="Pokedex made with PokeAPI">
@@ -36,44 +36,61 @@
   @vue:mounted="init()"
   v-effect="updateTitle()"
 >
-  <ul class="filter">
-    <li
-      v-if="pokemons.length"
-      :class="['card', { active: currentTypeIdx < 0 }]"
-      @click="currentTypeIdx = -1"
+  <header>
+    <img
+      v-show="currentLang !== 'zh'"
+      src="./images/pokemon_logo.png"
+      alt="pokemon logo"
     >
-      {{ currentLang === 'zh' ? '全部' : 'All' }} ({{ pokemons.length }})
-    </li>
-    <li
-      v-for="(type, typeIdx) of types.map(type => type[currentLang])"
-      :class="['card', { active: typeIdx === currentTypeIdx }]"
-      @click="currentTypeIdx = typeIdx"
+    <img
+      class="logo-zh"
+      v-show="currentLang === 'zh'"
+      src="./images/pokemon_logo_zh.png"
+      alt="pokemon logo"
     >
-      {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types[currentLang].includes(type)).length }})
-    </li>
-  </ul>
+    <nav>
+      <ul class="filter">
+        <li
+          v-if="pokemons.length"
+          :class="['card', { active: currentTypeIdx < 0 }]"
+          @click="currentTypeIdx = -1"
+        >
+          {{ currentLang === 'zh' ? '全部' : 'All' }} ({{ pokemons.length }})
+        </li>
+        <li
+          v-for="(type, typeIdx) of types.map(type => type[currentLang])"
+          :class="['card', { active: typeIdx === currentTypeIdx }]"
+          @click="currentTypeIdx = typeIdx"
+        >
+          {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types[currentLang].includes(type)).length }})
+        </li>
+      </ul>
+    </nav>
+  </header>
   
-  <ul class="pokemons">
-    <li
-      v-for="pokemon of pokemons"
-      v-show="currentTypeIdx < 0 || pokemon.types[currentLang].includes(types[currentTypeIdx][currentLang])"
-      class="card tooltip-container"
-      @click="currentPokemon = pokemon; isDialogOpen = true;"
-    >
-      <div class="tooltip-bottom">{{ pokemon.name[currentLang] }}</div>
-      <img
-        class="square"
-        :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
-        :alt="pokemon.name[currentLang]"
-        :loading="pokemon.id < 51 ? 'eager' : 'lazy'"
+  <main>
+    <ul class="pokemons">
+      <li
+        v-for="pokemon of pokemons"
+        v-show="currentTypeIdx < 0 || pokemon.types[currentLang].includes(types[currentTypeIdx][currentLang])"
+        class="card tooltip-container"
+        @click="currentPokemon = pokemon; isDialogOpen = true;"
       >
-      <em class="pokemon-id">{{ '#' + pokemon.id }}</em>
-    </li>
-  </ul>
+        <div class="tooltip-bottom">{{ pokemon.name[currentLang] }}</div>
+        <img
+          class="square"
+          :src="`/images/official-artwork/front_default/${pokemon.id}.png`"
+          :alt="pokemon.name[currentLang]"
+          :loading="pokemon.id < 51 ? 'eager' : 'lazy'"
+        >
+        <em class="pokemon-id">{{ '#' + pokemon.id }}</em>
+      </li>
+    </ul>
+  </main>
 
   <footer>
     <a href="https://github.com/rayc2045/pokedex" target="_blank">
-      <img src="./images/logo-github.svg" alt="github">
+      <img src="./images/github_logo.svg" alt="github">
       <span>Ray C</span>
     </a>
   </footer>
@@ -121,7 +138,7 @@
   </dialog>
 
   <div class="loading" v-show="isLoading">
-    <img class="square" src="./images/pokeball_loading.svg">
+    <img class="square" src="./images/pokeball.svg">
   </div>
 
   <div
