@@ -14,6 +14,7 @@
 - 透過載入目標數和當前資料量做計算、結合樣式綁定 (Style Binding) 方法，製作出頁面上方跑動的進度條
 - 參考 W3Schools 介紹使用 CSS 製作的[提示框 (Tooltip)](https://www.w3schools.com/css/css_tooltip.asp)，做出滑鼠碰觸圖鑑元素就會在序號前顯示寶可夢名稱的方便設計
 - 資訊卡中的寶可夢圖片加上白色陰影 ([CSS `drop-shadow()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow))，達成如同發出光輝般的效果
+- 設計在大尺寸螢幕上，元素及字體大小能夠自適應縮放的響應式設計
 
 ### 開發紀錄
 - 透過 Node.js 將 PokeAPI 905 份寶可夢資料轉換成一份 [JSON API](https://raw.githubusercontent.com/rayc2045/pokedex/main/data/PokeApi.json)，將網頁載入時間縮短為 1 秒，並實現中英語言切換
