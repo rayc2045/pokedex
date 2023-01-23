@@ -1,23 +1,8 @@
-import { createApp, reactive } from 'https://unpkg.com/petite-vue?module';
-
-const util = reactive({
-  async fetchData(api) {
-    return await fetch(api).then(res => res.json());
-  },
-  firstLetterUppercase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  },
-  getNextItem(arr, currentItem) {
-    if (currentItem === arr.at(-1)) return arr[0];
-    return arr[arr.indexOf(currentItem) + 1];
-  },
-  getProgress(numerator, denominator) {
-    return `${((numerator / denominator) * 100).toFixed()}%`;
-  },
-});
+import { createApp } from './petite-vue.min.js';
+import utils from './utils.js';
 
 const App = {
-  util,
+  utils,
   max: 905,
   pokemons: [],
   types: [],
@@ -27,7 +12,7 @@ const App = {
   currentTypeIdx: -1,
   currentPokemon: null,
   get progress() {
-    return util.getProgress(this.pokemons.length, this.max);
+    return utils.getProgress(this.pokemons.length, this.max);
   },
   get pokemonInfoNameSize() {
     if (!this.currentPokemon) return;
@@ -40,7 +25,7 @@ const App = {
     return baseSize;
   },
   async init() {
-    const pokemons = await util.fetchData('../data/PokeApi.json');
+    const pokemons = await utils.fetchData('../data/PokeApi.json');
     this.pokemons = pokemons;
     // get all pokemon types
     pokemons.forEach(pokemon => {
@@ -63,7 +48,7 @@ const App = {
     if (dataLangs.includes(userLang)) this.currentLang = userLang;
 
     this.isLoading = false;
-    // this.types
+
     // const promises = [];
     // for (let i = 1; i <= this.max; i++) promises.push(this.fetchPokemon(i));
     // await Promise.all(promises);
@@ -75,8 +60,8 @@ const App = {
     document.title = 'Pokédex';
   },
   // async fetchPokemon(id) {
-  //   const pokemon = await util.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  //   const species = await util.fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+  //   const pokemon = await utils.fetchData(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  //   const species = await utils.fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   //   const types = pokemon.types.map(type => type.type.name);
   //   const name = {
   //     en: species.names.find(item => item.language.name === 'en').name,

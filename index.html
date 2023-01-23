@@ -62,7 +62,7 @@
           :class="['card', { active: typeIdx === currentTypeIdx }]"
           @click="currentTypeIdx = typeIdx"
         >
-          {{ util.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types[currentLang].includes(type)).length }})
+          {{ utils.firstLetterUppercase(type) }} ({{ pokemons.filter(pokemon => pokemon.types[currentLang].includes(type)).length }})
         </li>
       </ul>
     </nav>
@@ -98,7 +98,7 @@
   <button
     v-if="pokemons.length"
     class="lang-switch"
-    @click="currentLang = util.getNextItem(Object.keys(pokemons[0].name), currentLang)"
+    @click="currentLang = utils.getNextItem(Object.keys(pokemons[0].name), currentLang)"
   >
     {{ currentLang === 'zh' ? 'English' : '中文' }}
   </button>
