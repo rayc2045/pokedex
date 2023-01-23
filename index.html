@@ -51,7 +51,6 @@
     <nav>
       <ul class="filter">
         <li
-          v-if="pokemons.length"
           :class="['card', { active: currentTypeIdx < 0 }]"
           @click="currentTypeIdx = -1"
         >
@@ -96,7 +95,6 @@
   </footer>
 
   <button
-    v-if="pokemons.length"
     class="lang-switch"
     @click="currentLang = utils.getNextItem(Object.keys(pokemons[0].name), currentLang)"
   >
